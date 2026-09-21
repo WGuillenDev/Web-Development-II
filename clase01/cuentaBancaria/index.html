@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi banco</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="card">
+        <h1>Mi banco</h1>
+        <form id="formBanco">
+            <div class="salida-saldo">Saldo: $
+                <span id="txtSaldo">50000</span>   
+            </div>
+            <div>
+                <label for="operacion">Operación:</label>
+                <select id="operacion">
+                    <option value="depositar">Depositar</option>
+                    <option value="retirar">Retirar</option>
+                    <option value="consultar">Consultar</option>
+                </select>
+                <label for="monto">Monto: $</label>
+                <input type="number" id="monto" min="0">
+                <button type="submit">Procesar operación</button>
+            </div>
+            <div class="mensaje">
+                <span id="mensaje"></span>
+            </div>
+        </form>
+    </div>
+    <script src="dist/banco.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+body {
+     min-height: 100vh; 
+     display: flex; 
+     justify-content: center;
+     align-items: center; 
+     background: #f0f0f0; 
+}
+.card {
+     width: 400px; 
+     padding: 20px; 
+     border-radius: 10px; 
+     box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+     background: #fff; 
+}
+.card h1 {
+     text-align:left; 
+     color: #9f6cda; 
+     font-size: 24px; 
+}
+.salida-saldo {
+    text-align: left; 
+    color: #e61c1c;
+    font-size: 18px; 
+    font-weight: bold; 
+}
+
+label {
+    font-weight: bold;
+}
+input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #9f6cda;
+    color: #fff;
+    cursor: pointer;
+}
+.mensaje {
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+}
