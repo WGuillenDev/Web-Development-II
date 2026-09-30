@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculadora de Salario</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <main class="card">
+            <h1>Calculadora de Salario</h1>
+
+            <form id="salarioForm" novalidate>
+                <div class="campo">
+                    <label for="nombre">Nombre del Empleado:</label>
+                    <input type="text" id="nombre" name="nombre">
+                    <span id="error-nombre" class="error-msg"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="salario">Salario Bruto Mensual ($):</label>
+                    <input type="number" id="salario" name="salario">
+                    <span id="error-salario" class="error-msg"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="horasExtra">Horas Extra Trabajadas:</label>
+                    <input type="number" id="horasExtra" name="horasExtra" value="0">
+                    <span id="error-horasExtra" class="error-msg"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="contrato">Tipo de Contrato:</label>
+                    <select id="contrato" name="contrato">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="tiempo_completo">Tiempo completo</option>
+                        <option value="medio_tiempo">Medio tiempo</option>
+                        <option value="freelance">Freelance</option>
+                    </select>
+                    <span id="error-contrato" class="error-msg"></span>
+                </div>
+
+                <div class="campo-check">
+                    <input type="checkbox" id="seguro" name="seguro">
+                    <label for="seguro">Incluir Seguro Complementario ($45)</label>
+                    <span id="error-seguro" class="error-msg"></span>
+                </div>
+
+                <button type="submit">Calcular Salario Neto</button>
+            </form>
+
+            <div id="resultado"></div>
+        </main>
+
+        <script type="module" src="dist/app.js"></script>
+    </body>
+</html>
