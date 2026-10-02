@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gym Pass Access</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="tarjeta info">
+    <div class="cabecera">
+      <span class="etiqueta">Gym Pass</span>
+      <h1>Gym Pass Access</h1>
+    </div>
+    <div class="cuerpo">
+      <p>Prueba los distintos accesos:</p>
+      <ul>
+        <li><a href="/gimnasio?pass=Standard">Área general con pase Standard</a></li>
+        <li><a href="/gimnasio?pass=VIP">Área general con pase VIP</a></li>
+        <li><a href="/gimnasio">Sin pase</a></li>
+        <li><a href="/gimnasio?pass=Oro">Pase no válido</a></li>
+        <li><a href="/vip?pass=VIP">Área VIP (hora actual)</a></li>
+        <li><a href="/vip?pass=VIP&amp;hora=10">Área VIP a las 10:00</a></li>
+        <li><a href="/vip?pass=VIP&amp;hora=23">Área VIP a las 23:00</a></li>
+        <li><a href="/vip?pass=Standard">Área VIP con pase Standard</a></li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>
