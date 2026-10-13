@@ -1,0 +1,14 @@
+body {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  font-family: 'Times New Roman', serif;
+  padding: 0 1rem;
+}
+
+.status-active {
+  color: #4ade80;
+}
+
+.status-inactive {
+  color: #f87171;
+}

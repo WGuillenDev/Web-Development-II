@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",                /* Sistema de módulos moderno para Node.js */
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "rootDir": "./src",                  /* Dónde buscar tus archivos TypeScript (.ts) */
+    "outDir": "./dist",                  /* Dónde guardar los archivos JavaScript (.js) compilados */
+    "esModuleInterop": true,             /* Emite JavaScript adicional para facilitar la importación de módulos CommonJS */
+  },
+  "include": ["src/**/*"]                /* Indica a TypeScript que solo compile lo que esté dentro de 'src' */
+}

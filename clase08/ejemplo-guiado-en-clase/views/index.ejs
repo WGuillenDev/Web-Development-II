@@ -1,0 +1,24 @@
+<%- include('partials/header'); %>
+    <h1><%= titulo %></h1>
+
+    <p>Fecha actual: <%= new Date().toLocaleDateString('es-ES') %></p>
+    <%# Corrección: /about no envía isActive; typeof evita el ReferenceError (mismo patrón que usuarios) %>
+    <% if (typeof isActive !== 'undefined' && isActive) { %>
+        <p class="status-active">El servidor está activo</p>
+    <% } else { %>
+        <p class="status-inactive">El servidor está inactivo</p>
+    <% } %>
+
+    <h2>Lista de Usuarios</h2>
+    <% if (typeof usuarios !== 'undefined' && usuarios.length > 0) { %>
+        <ul>
+            <% for (let i = 0; i < usuarios.length; i++) { %>
+                <li>
+                    <%= usuarios[i].id %> - <%= usuarios[i].nombre %> <%= usuarios[i].apellido %>
+                </li>
+            <% } %>
+        </ul>
+    <% } else { %>
+        <p>No hay usuarios registrados actualmente.</p>
+    <% } %>
+<%- include('partials/footer'); %>
