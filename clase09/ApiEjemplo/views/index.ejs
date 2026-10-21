@@ -1,0 +1,21 @@
+<div class="card">
+<h2>Clima en TypeScript</h2>
+<form action="/clima" method="POST">
+<input type="text" name="ciudad" placeholder="Ej: Madrid,
+Bogota" required autocomplete="off">
+<button type="submit">Buscar Clima</button>
+</form>
+<% if (clima) { %>
+<div class="resultado">
+<h3><%= clima.ciudad %>, <%= clima.pais %></h3>
+<img src="<%= clima.icono %>" alt="Icono del tiempo">
+<div class="temp"><%= clima.temp %>°C</div>
+<p style="text-transform: capitalize; color: #64748b;"><%=
+clima.descripcion %></p>
+<p>Humedad: <%= clima.humedad %>%</p>
+</div>
+<% } %>
+<% if (error) { %>
+<p class="error"> <%= error %></p>
+<% } %>
+</div>
