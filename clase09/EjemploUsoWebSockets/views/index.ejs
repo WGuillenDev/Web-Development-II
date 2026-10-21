@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSockets</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+  <main class="chat">
+    <h1 class="chat__title">Interacción cliente-servidor vía WebSockets</h1>
+    <div id="messages" class="chat__messages" aria-live="polite"></div>
+    <form id="messageForm" class="chat__form">
+      <input type="text" id="messageInput" class="chat__input" placeholder="Escribe un mensaje aquí..." autocomplete="off">
+      <button type="submit" class="chat__button">Enviar</button>
+    </form>
+  </main>
+  <script src="/js/client.js"></script>
+</body>
+</html>
