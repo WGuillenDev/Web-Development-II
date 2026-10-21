@@ -1,0 +1,98 @@
+<%- include('partials/header') %>
+
+    <main>
+        <section class="hero">
+            <img class="hero__fondo" src="<%= imagen %>"
+                 srcset="/assets/images/institucional/campus-800.webp 800w, /assets/images/institucional/campus-1280.webp 1280w, /assets/images/institucional/campus-1920.webp 1920w"
+                 sizes="100vw" alt="Vista aérea del CTP Nataniel Arias Murillo con las montañas de Aguas Zarcas al fondo" width="1280" height="600" fetchpriority="high">
+            <div class="hero__contenido">
+                <h2 class="hero__titulo"><%= encabezado %> <em><%= encabezadoAcento %></em></h2>
+                <p class="hero__sub"><%= descripcion %></p>
+                <p class="hero__dato">Costado este del cementerio, Aguas Zarcas, San Carlos<br>Fundado en 1971 · 55 años en 2026</p>
+            </div>
+        </section>
+
+        <section class="quienes">
+            <div class="contenedor quienes__grid">
+                <aside class="quienes__datos revelar">
+                    <h3 class="rotulo">El colegio en cifras</h3>
+                    <dl>
+                        <% datos.forEach(dato => { %>
+                            <div class="dato">
+                                <dt><%= dato.etiqueta %></dt>
+                                <dd <% if (dato.contar) { %>data-numero="<%= dato.valor %>"<% } %>><%= dato.valor %></dd>
+                            </div>
+                        <% }); %>
+                    </dl>
+                </aside>
+                <article class="quienes__historia revelar">
+                    <% historia.forEach(parrafo => { %>
+                        <p><%= parrafo %></p>
+                    <% }); %>
+                    <p class="firma"><em>CTP Nataniel Arias Murillo</em></p>
+                    <p class="firma__detalle">Aguas Zarcas · San Carlos · Alajuela</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="especialidades">
+            <div class="contenedor especialidades__grid">
+                <figure class="especialidades__foto revelar">
+                    <img src="/assets/images/institucional/entrada.webp" alt="Entrada del Colegio Técnico Profesional de Aguas Zarcas con el rótulo Fundado en 1971" width="1200" height="900" loading="lazy">
+                    <figcaption>La entrada del colegio. Foto: TVN Canal 14, 2024.</figcaption>
+                </figure>
+                <div class="especialidades__texto revelar">
+                    <h3 class="seccion__titulo">Una oferta técnica <em>de día y de noche</em></h3>
+                    <p class="seccion__intro">Cada estudiante termina con el bachillerato y un título de técnico medio en la especialidad que eligió.</p>
+                    <h4 class="rotulo especialidades__grupo">Sección diurna</h4>
+                    <ul class="especialidades__lista">
+                        <% especialidades.forEach(especialidad => { %>
+                            <li>
+                                <h4><%= especialidad.nombre %></h4>
+                                <p><%= especialidad.descripcion %></p>
+                            </li>
+                        <% }); %>
+                    </ul>
+                    <h4 class="rotulo especialidades__grupo">Sección nocturna</h4>
+                    <p class="nota">Gratuita, para personas con bachillerato y más de 17 años.</p>
+                    <ul class="nocturnas">
+                        <% nocturnas.forEach(tecnico => { %>
+                            <li><%= tecnico %></li>
+                        <% }); %>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="logros">
+            <div class="contenedor logros__grid">
+                <div class="logros__texto revelar">
+                    <h3 class="seccion__titulo">Campeones de <em>robótica</em></h3>
+                    <p class="seccion__intro">Con el acompañamiento de su profesor tutor, los equipos del colegio han llevado el nombre de Aguas Zarcas a las olimpiadas mundiales.</p>
+                    <ol class="logros__lista">
+                        <% logros.forEach(logro => { %>
+                            <li>
+                                <span class="logros__anio"><%= logro.anio %></span>
+                                <div>
+                                    <h4><%= logro.titulo %></h4>
+                                    <p><%= logro.descripcion %></p>
+                                </div>
+                            </li>
+                        <% }); %>
+                    </ol>
+                </div>
+                <figure class="logros__foto revelar">
+                    <img src="/assets/images/institucional/robotica.webp" alt="Equipos de robótica KRONOS y ARTEMIS del colegio con sus robots" width="1200" height="800" loading="lazy">
+                    <figcaption>Equipos ARTEMIS y KRONOS, 2025. Foto: San Carlos Digital (cortesía).</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="lema">
+            <blockquote class="contenedor revelar">
+                <p>“<%= lema %>”</p>
+            </blockquote>
+        </section>
+    </main>
+
+<%- include('partials/footer') %>

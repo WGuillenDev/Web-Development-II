@@ -1,0 +1,19 @@
+/* ---------- Variables ---------- */
+:root {
+  --arena: #f4efe4;
+  --arena-oscura: #e9e1cf;
+  --tinta: #17302c;
+  --tinta-suave: #4b5b57;
+  --linea: #d6ccb6;
+  --verde-noche: #0f3a35;
+  --rojo: #c1121f;
+  --dorado: #e6d39a;
+  --blanco: #ffffff;
+
+  --serif: 'Newsreader', Georgia, serif;
+  --sans: 'Hanken Grotesk', system-ui, sans-serif;
+
+  --ancho: 64rem;
+  --margen: clamp(1.25rem, 5vw, 3rem);
+  --curva: cubic-bezier(0.16, 1, 0.3, 1);
+}

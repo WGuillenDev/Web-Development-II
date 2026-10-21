@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+    <main class="instalaciones">
+        <div class="contenedor instalaciones__intro revelar">
+            <h2 class="seccion__titulo seccion__titulo--grande"><%= encabezado %> <em><%= encabezadoAcento %></em></h2>
+            <p class="seccion__intro"><%= descripcion %></p>
+        </div>
+
+        <ul class="contenedor instalaciones__lista">
+            <% instalaciones.forEach(instalacion => { %>
+                <li class="instalacion revelar">
+                    <div class="instalacion__foto">
+                        <img src="<%= instalacion.imagen %>" alt="<%= instalacion.nombre %>" width="1200" height="900" loading="lazy">
+                    </div>
+                    <div class="instalacion__texto">
+                        <h3><%= instalacion.nombre %></h3>
+                        <p class="detalle"><%= instalacion.detalle %></p>
+                        <p class="instalacion__descripcion"><%= instalacion.descripcion %></p>
+                        <ul class="etiquetas">
+                            <% instalacion.etiquetas.forEach(etiqueta => { %>
+                                <li><%= etiqueta %></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+
+        <section class="servicios">
+            <div class="contenedor revelar">
+                <h3 class="seccion__titulo">Además del <em>aula</em></h3>
+                <ul class="servicios__lista">
+                    <% servicios.forEach(servicio => { %>
+                        <li><%= servicio %></li>
+                    <% }); %>
+                </ul>
+                <p class="nota">Las fotos del laboratorio de cómputo, el taller, la finca y la planta son imágenes referenciales de Unsplash. La de los corredores es del colegio (TVN Canal 14).</p>
+            </div>
+        </section>
+    </main>
+
+<%- include('partials/footer') %>

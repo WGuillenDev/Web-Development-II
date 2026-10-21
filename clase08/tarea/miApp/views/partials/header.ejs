@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Colegio Técnico Profesional Nataniel Arias Murillo, Aguas Zarcas, San Carlos. Educación que abre oportunidades desde 1971.">
+    <title><%= titulo %> | CTP Nataniel Arias Murillo</title>
+    <link rel="preload" href="/assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/tokens.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body class="pagina-<%= pagina %>">
+    <header class="header">
+        <a class="header__marca" href="/">
+            <img class="header__escudo" src="/assets/images/institucional/escudo.webp" alt="Escudo del CTP Nataniel Arias Murillo" width="272" height="320">
+            <h1 class="header__titulo">CTP <em>Nataniel Arias Murillo</em></h1>
+        </a>
+        <nav aria-label="Menú principal">
+            <ul class="header__links">
+                <li><a href="/" class="header__link" <% if (pagina === 'inicio') { %>aria-current="page"<% } %>>Inicio</a></li>
+                <li><a href="/Instalaciones" class="header__link" <% if (pagina === 'Instalaciones') { %>aria-current="page"<% } %>>Instalaciones</a></li>
+            </ul>
+        </nav>
+    </header>
