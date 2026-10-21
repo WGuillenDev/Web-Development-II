@@ -1,0 +1,31 @@
+<div class="container">
+<h1>Buscador Mundial (v5)</h1>
+<form action="/country" method="POST">
+<input type="text" name="country" placeholder="Ej. Canada, Costa Rica..."
+required>
+<button type="submit">Buscar</button>
+</form>
+<% if (error) { %>
+<p class="error"><%= error %></p>
+<% } %>
+<% if (countries && countries.length > 0) { %>
+<div class="results">
+<% countries.forEach(country => { %>
+<div class="card">
+<% if (country.flag && country.flag.url_svg) { %>
+<img src="<%= country.flag.url_svg %>" alt="Bandera">
+<% } %>
+<div>
+<h3><%= country.names ? country.names.common : 'Sin nombre'
+%></h3>
+<p><strong>Capital:</strong> <%= country.capitals &&
+country.capitals.length > 0 ? country.capitals[0].name : 'No registra' %></p>
+<p><strong>Región:</strong> <%= country.region || 'N/D' %></p>
+<p><strong>Población:</strong> <%= country.population ?
+country.population.toLocaleString() : 'N/D' %></p>
+</div>
+</div>
+<% }) %>
+</div>
+<% } %>
+</div>
