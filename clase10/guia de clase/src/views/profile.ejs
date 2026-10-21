@@ -1,0 +1,8 @@
+<body>
+    <h2>Bienvenido, <%= user.name %></h2>
+    <p><strong>ID:</strong> <%= user.id %></p>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <form action="/logout" method="POST">
+        <button type="submit">Cerrar Sesión</button>
+    </form>
+</body>
