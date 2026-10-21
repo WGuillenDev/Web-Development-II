@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokédex - Buscador Pokémon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+  <div class="fondo" aria-hidden="true">
+    <span class="fondo__mancha fondo__mancha--roja"></span>
+    <span class="fondo__mancha fondo__mancha--ambar"></span>
+    <span class="fondo__mancha fondo__mancha--azul"></span>
+    <span class="fondo__puntos"></span>
+  </div>
+
+  <header class="cabecera">
+    <div class="cabecera__contenido">
+      <span class="logo" aria-hidden="true"></span>
+      <span class="cabecera__titulo">Pokédex</span>
+      <span class="etiqueta-es">ES</span>
+    </div>
+  </header>
+
+  <main class="principal">
+    <section class="encabezado">
+      <h1 class="encabezado__titulo">Pokédex <span class="encabezado__punto"></span></h1>
+      <p class="encabezado__texto">Descubre información completa, tipos, medidas y estadísticas base de tu Pokémon.</p>
+    </section>
+
+    <% const estado = error ? 'error' : (pokemon ? 'result' : 'idle'); %>
+
+    <section class="escenario state-<%= estado %>">
+      <div class="bola-zona">
+        <div class="bola-zona__destello" aria-hidden="true">
+          <span class="bola-zona__luz"></span>
+        </div>
+        <span class="bola-zona__sombra" aria-hidden="true"></span>
+
+        <div class="pokebola" aria-hidden="true">
+          <div class="pokebola__mitad pokebola__mitad--superior">
+            <span class="pokebola__brillo"></span>
+          </div>
+          <div class="pokebola__banda">
+            <span class="pokebola__boton"><span class="pokebola__boton-interior"></span></span>
+          </div>
+          <div class="pokebola__mitad pokebola__mitad--inferior"></div>
+        </div>
+      </div>
+
+      <% if (error) { %>
+        <div class="alerta" role="alert">
+          <span class="alerta__icono">!</span>
+          <div>
+            <h4 class="alerta__titulo">No se pudo completar la búsqueda</h4>
+            <p class="alerta__texto"><%= error %></p>
+          </div>
+        </div>
+      <% } %>
+
+      <% if (pokemon) { %>
+        <div class="tarjeta-zona">
+          <article class="tarjeta">
+            <div class="tarjeta__cabecera">
+              <span class="insignia"><span class="insignia__punto"></span><%= pokemon.numero %></span>
+              <span class="tarjeta__region"><%= pokemon.region %></span>
+            </div>
+
+            <div class="tarjeta__arte">
+              <% if (pokemon.imagen) { %>
+                <img src="<%= pokemon.imagen %>" alt="<%= pokemon.nombre %>">
+              <% } %>
+            </div>
+
+            <div class="tarjeta__identidad">
+              <h2 class="tarjeta__nombre"><%= pokemon.nombre %></h2>
+              <div class="tipos">
+                <% pokemon.tipos.forEach(tipo => { %>
+                  <span class="tipo tipo--<%= tipo.clave %>"><%= tipo.nombre %></span>
+                <% }) %>
+              </div>
+            </div>
+
+            <div class="medidas">
+              <div class="medidas__item">
+                <span class="medidas__etiqueta">Altura</span>
+                <span class="medidas__valor"><%= pokemon.altura %></span>
+              </div>
+              <div class="medidas__item medidas__item--centro">
+                <span class="medidas__etiqueta">Peso</span>
+                <span class="medidas__valor"><%= pokemon.peso %></span>
+              </div>
+              <div class="medidas__item">
+                <span class="medidas__etiqueta">Habilidades</span>
+                <span class="medidas__valor medidas__valor--texto"><%= pokemon.habilidades %></span>
+              </div>
+            </div>
+
+            <div class="stats">
+              <div class="stats__cabecera">
+                <h3 class="stats__titulo">Estadísticas Base</h3>
+                <span class="stats__total">Total: <strong><%= pokemon.total %></strong></span>
+              </div>
+              <% pokemon.estadisticas.forEach(stat => { %>
+                <div class="stat">
+                  <span class="stat__nombre"><%= stat.etiqueta %></span>
+                  <span class="stat__valor"><%= stat.valor %></span>
+                  <div class="stat__pista">
+                    <div class="stat__barra stat__barra--<%= stat.clave %>" style="width: <%= stat.porcentaje %>%"></div>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+
+            <div class="tarjeta__pie">
+              <span class="tarjeta__nota">Presiona otra búsqueda abajo</span>
+              <a class="tarjeta__cerrar" href="/">Cerrar Pokédex</a>
+            </div>
+          </article>
+        </div>
+      <% } %>
+    </section>
+
+    <section class="busqueda">
+      <form class="busqueda__form" action="/pokemon" method="POST">
+        <span class="busqueda__lupa" aria-hidden="true"></span>
+        <input class="busqueda__input" type="text" name="pokemon" value="<%= consulta %>" placeholder="Ej: pikachu, charizard, 25" autocomplete="off" required>
+        <button class="busqueda__boton" type="submit">Buscar</button>
+      </form>
+
+      <div class="rapidas">
+        <span class="rapidas__etiqueta">Prueba rápida:</span>
+        <% [['pikachu', 'Pikachu #25'], ['charizard', 'Charizard #6'], ['gengar', 'Gengar #94']].forEach(([valor, texto]) => { %>
+          <form action="/pokemon" method="POST">
+            <input type="hidden" name="pokemon" value="<%= valor %>">
+            <button class="rapidas__chip" type="submit"><%= texto %></button>
+          </form>
+        <% }) %>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

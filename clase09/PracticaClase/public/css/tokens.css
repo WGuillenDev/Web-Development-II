@@ -1,0 +1,38 @@
+:root {
+  --poke-red: #ef4444;
+  --poke-red-dark: #dc2626;
+  --poke-red-deep: #b91c1c;
+  --poke-yellow: #f59e0b;
+  --poke-amber: #fbbf24;
+
+  --bg-base: #0b0f19;
+  --bg-deep: #0f172a;
+  --bg-card: #182234;
+  --bg-chip: #1e293b;
+  --bg-ball-edge: #070a10;
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.12);
+
+  --text: #f1f5f9;
+  --text-strong: #ffffff;
+  --text-soft: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+
+  --ok: #34d399;
+
+  --stat-hp: #10b981;
+  --stat-atk: #ef4444;
+  --stat-def: #f59e0b;
+  --stat-spa: #38bdf8;
+  --stat-spd: #818cf8;
+  --stat-spe: #ec4899;
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
