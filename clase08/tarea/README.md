@@ -1,7 +1,7 @@
 # Tarea Clase 8 | Sitio web del CTP Nataniel Arias Murillo
 
 > Programación en Ambiente Web II (ISW-621) · Ingeniería del Software
-> Universidad Técnica Nacional, Sede San Carlos · Docente: Milena Vargas Blanco
+> Universidad Técnica Nacional, Sede San Carlos
 
 ---
 
