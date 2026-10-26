@@ -1,0 +1,58 @@
+<aside class="module module--weather" id="clima" aria-labelledby="weather-title">
+  <% if (weather) { %>
+    <%
+      const tempLevel = Math.min(100, Math.max(0, ((weather.temperature + 5) / 45) * 100));
+      const windLevel = Math.min(100, Math.max(0, (weather.windSpeed / 60) * 100));
+    %>
+    <section class="weather glass">
+      <div class="weather__hero<%= weather.isDay === false ? ' weather__hero--night' : '' %>" style="--wind-speed: <%= weather.windSpeed %>">
+        <div class="weather__stars"></div>
+        <div class="weather__art" aria-hidden="true">
+          <span class="weather__layer weather__cloud weather__cloud--back"><span class="cloud__puff"></span><span class="cloud__puff"></span><span class="cloud__puff"></span></span>
+          <span class="weather__layer weather__sun"></span>
+          <span class="weather__layer weather__cloud weather__cloud--front"><span class="cloud__puff"></span><span class="cloud__puff"></span><span class="cloud__puff"></span></span>
+        </div>
+        <div class="weather__gusts" aria-hidden="true">
+          <span class="weather__gust"></span>
+          <span class="weather__gust"></span>
+          <span class="weather__gust"></span>
+        </div>
+        <p class="weather__label"><svg class="icon"><use href="#i-pin"/></svg>Tu ubicación</p>
+        <h2 class="weather__city" id="weather-title"><%= weather.city %></h2>
+        <p class="weather__region"><%= [weather.region, weather.country].filter(Boolean).join(', ') %></p>
+        <p class="weather__temp"><span data-count-to="<%= Math.round(weather.temperature) %>"><%= Math.round(weather.temperature) %></span><sup>°C</sup></p>
+      </div>
+
+      <div class="weather__body">
+        <div class="weather__stats">
+          <div class="stat stat--temp">
+            <p class="stat__label"><svg class="icon"><use href="#i-temp"/></svg>Temperatura</p>
+            <p class="stat__value"><span data-count-to="<%= weather.temperature.toFixed(1) %>"><%= weather.temperature.toFixed(1) %></span> <small>°C</small></p>
+            <div class="stat__meter" style="--level: <%= tempLevel.toFixed(0) %>%"><span></span></div>
+          </div>
+          <div class="stat stat--wind">
+            <p class="stat__label"><svg class="icon"><use href="#i-wind"/></svg>Viento</p>
+            <p class="stat__value"><span data-count-to="<%= weather.windSpeed.toFixed(1) %>"><%= weather.windSpeed.toFixed(1) %></span> <small>km/h</small></p>
+            <div class="stat__meter" style="--level: <%= windLevel.toFixed(0) %>%"><span></span></div>
+          </div>
+        </div>
+        <dl class="weather__details">
+          <div><dt>Coordenadas</dt><dd><%= weather.latitude.toFixed(2) %>, <%= weather.longitude.toFixed(2) %></dd></div>
+          <div><dt>Actualizado</dt><dd><%= weather.updatedAt %></dd></div>
+        </dl>
+        <p class="weather__source">Ubicación aproximada según tu IP (ip-api) · Clima de Open-Meteo</p>
+      </div>
+    </section>
+  <% } else { %>
+    <section class="weather-empty glass">
+      <h2 class="sr-only" id="weather-title">Clima</h2>
+      <div class="notice">
+        <svg class="icon"><use href="#i-cloud-off"/></svg>
+        <div>
+          <p class="notice__title">El clima no está disponible</p>
+          <p><%= weatherError || 'No pudimos consultar el clima en este momento. El resto de SkySocial sigue funcionando.' %></p>
+        </div>
+      </div>
+    </section>
+  <% } %>
+</aside>

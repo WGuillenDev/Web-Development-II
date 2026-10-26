@@ -1,0 +1,42 @@
+<section class="module module--feed is-active" id="feed" aria-labelledby="feed-title">
+  <div class="feed">
+    <header class="feed__head glass">
+      <div class="module__head">
+        <span class="pill"><svg class="icon"><use href="#i-feed"/></svg>Feed social</span>
+        <span class="pill"><%= posts.length %> publicaciones</span>
+      </div>
+      <h2 class="feed__title" id="feed-title">Publicaciones de la <span class="text-gradient">comunidad</span></h2>
+      <p class="feed__intro">Lee lo que comparten los usuarios de SkySocial, con el nombre de cada autor.</p>
+      <a class="feed__cta" href="#chat" data-module="chat">
+        <svg class="icon"><use href="#i-chat"/></svg>
+        <span>¿Quieres publicar algo? Escríbelo en el <strong>Chat global</strong></span>
+        <svg class="icon feed__cta-arrow"><use href="#i-arrow"/></svg>
+      </a>
+    </header>
+
+    <% if (feedError) { %>
+      <div class="notice">
+        <svg class="icon"><use href="#i-cloud-off"/></svg>
+        <div>
+          <p class="notice__title">No pudimos cargar el feed</p>
+          <p><%= feedError %></p>
+        </div>
+      </div>
+    <% } %>
+
+    <% posts.forEach((post) => { %>
+      <article class="post glass glass--interactive">
+        <div class="post__head">
+          <span class="avatar avatar--<%= ((post.userId - 1) % 10) + 1 %>"><%= post.authorInitials %></span>
+          <div>
+            <p class="post__name"><%= post.authorName %></p>
+            <p class="post__handle">@<%= post.authorUsername %> · <%= post.authorCity %></p>
+          </div>
+          <span class="post__number">#<%= post.id %></span>
+        </div>
+        <h3 class="post__title"><%= post.title %></h3>
+        <p class="post__body"><%= post.body %></p>
+      </article>
+    <% }) %>
+  </div>
+</section>

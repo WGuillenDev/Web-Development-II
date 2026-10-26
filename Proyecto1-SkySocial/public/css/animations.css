@@ -1,0 +1,290 @@
+@property --mesh-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --mesh-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 30%;
+}
+
+@property --mesh-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 35%;
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes mesh-shift {
+  0%,
+  100% {
+    --mesh-angle: 0deg;
+    --mesh-x: 25%;
+    --mesh-y: 30%;
+  }
+  50% {
+    --mesh-angle: 180deg;
+    --mesh-x: 70%;
+    --mesh-y: 65%;
+  }
+}
+
+@keyframes border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(0.55);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(6px, -6px);
+  }
+}
+
+@keyframes float-back {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-10px, 4px);
+  }
+}
+
+@keyframes gust {
+  from {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  15%,
+  70% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(380%);
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    filter: brightness(1.08) saturate(1.15);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 50%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes shine {
+  0%,
+  70% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes module-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.sky__mesh {
+  animation: mesh-shift 28s ease-in-out infinite;
+}
+
+.sky__stars::before {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+.sky__stars::after {
+  animation: twinkle 5.5s ease-in-out 1.2s infinite;
+}
+
+.weather__stars {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+.sky__shooting--1 {
+  animation: shooting 11s ease-in 3s infinite;
+}
+
+.sky__shooting--2 {
+  animation: shooting 14s ease-in 8s infinite;
+}
+
+@keyframes shooting {
+  0% {
+    opacity: 0;
+    transform: rotate(-24deg) translateX(0);
+  }
+  2% {
+    opacity: 1;
+  }
+  8%,
+  100% {
+    opacity: 0;
+    transform: rotate(-24deg) translateX(-420px);
+  }
+}
+
+.chat::after {
+  animation: border-spin 4s linear infinite;
+}
+
+.brand__mark::after {
+  animation: shine 6s ease-in-out infinite;
+}
+
+.weather__sun {
+  animation: glow 5s ease-in-out infinite;
+}
+
+.weather__sun::before {
+  animation: spin 40s linear infinite;
+}
+
+.weather__cloud--front {
+  animation: float 7s ease-in-out infinite;
+}
+
+.weather__cloud--back {
+  animation: float-back 9s ease-in-out infinite;
+}
+
+.weather__gust {
+  animation: gust var(--wind-duration) linear infinite;
+}
+
+.status__dot {
+  animation: pulse 2s ease-out infinite;
+}
+
+.module {
+  animation: rise 0.7s var(--ease-out) both;
+}
+
+.module--feed {
+  animation-delay: 0.08s;
+}
+
+.module--chat {
+  animation-delay: 0.16s;
+}
+
+.js-tabs .module.is-active {
+  animation: module-in 0.45s var(--ease-out) both;
+}
+
+.message {
+  animation: pop 0.4s var(--ease-spring) both;
+}
+
+.stat__meter span {
+  transform-origin: left;
+  animation: meter 1.4s var(--ease-out) 0.3s both;
+}
+
+@keyframes meter {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Revelado de posts al hacer scroll, solo donde el navegador lo soporta */
+@supports (animation-timeline: view()) {
+  .post {
+    animation: rise linear backwards;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+/* Transición circular al cambiar de tema */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky__mesh,
+  .sky__stars::before,
+  .sky__stars::after,
+  .sky__shooting,
+  .weather__stars,
+  .weather__gust,
+  .status__dot,
+  .chat::after {
+    animation: none;
+  }
+}

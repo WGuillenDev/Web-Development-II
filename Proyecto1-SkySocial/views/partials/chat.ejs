@@ -1,0 +1,45 @@
+<aside class="module module--chat" id="chat" aria-labelledby="chat-title">
+  <section class="chat glass">
+    <div class="chat__head module__head">
+      <h2 class="module__title" id="chat-title"><span class="module__badge"><svg class="icon"><use href="#i-chat"/></svg></span>Chat global</h2>
+      <span class="pill pill--live"><span class="status__dot"></span>En vivo</span>
+    </div>
+
+    <div class="chat__messages" id="chat-messages" aria-live="polite">
+      <div class="chat__empty" id="chat-empty">
+        <span class="module__badge"><svg class="icon"><use href="#i-chat"/></svg></span>
+        <p class="chat__empty-title">Todavía no hay publicaciones en vivo</p>
+        <p>Escribe tu nombre y lo que está pasando. Todos los conectados lo verán al instante.</p>
+      </div>
+    </div>
+
+    <template id="message-template">
+      <div class="message">
+        <span class="avatar avatar--sm message__avatar"></span>
+        <div class="message__content">
+          <p class="message__meta"><span class="message__author"></span><span class="message__time"></span></p>
+          <p class="message__bubble"></p>
+        </div>
+      </div>
+    </template>
+
+    <form class="composer" id="composer" autocomplete="off">
+      <div class="composer__card">
+        <div class="composer__head">
+          <span class="composer__label" aria-hidden="true">De</span>
+          <span class="avatar avatar--sm composer__avatar" aria-hidden="true">?</span>
+          <label class="sr-only" for="author">Tu nombre</label>
+          <input class="composer__name" id="author" name="author" maxlength="40" placeholder="Tu nombre" required>
+        </div>
+        <div class="composer__body">
+          <label class="sr-only" for="content">Texto de la publicación</label>
+          <textarea class="composer__text" id="content" name="content" rows="2" maxlength="280" placeholder="¿Qué está pasando?" required></textarea>
+        </div>
+        <div class="composer__foot">
+          <span class="composer__count" aria-live="polite">0 / 280</span>
+          <button class="composer__send" type="submit"><svg class="icon"><use href="#i-send"/></svg>Publicar</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</aside>

@@ -1,0 +1,1574 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--topbar-h) + 12px);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd {
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.text-gradient {
+  background: var(--gradient-sunset);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Cielo de fondo: degradado, manchas de color y estrellas en modo oscuro */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg) 45%, var(--bg-bottom) 100%);
+}
+
+.sky__mesh {
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(45% 40% at var(--mesh-x) var(--mesh-y), var(--blob-1), transparent 70%),
+    radial-gradient(40% 45% at calc(100% - var(--mesh-x)) 30%, var(--blob-2), transparent 70%),
+    radial-gradient(45% 40% at 50% calc(100% - var(--mesh-y) / 2), var(--blob-3), transparent 70%),
+    conic-gradient(from var(--mesh-angle) at 50% 50%, var(--blob-1), var(--blob-2), var(--blob-3), var(--blob-1));
+  filter: blur(70px) saturate(130%);
+  opacity: 0.55;
+  transition: opacity 0.6s ease;
+}
+
+:root[data-theme='dark'] .sky__mesh {
+  opacity: 0.38;
+}
+
+/* Tres capas de estrellas con distinto tamaño y ritmo para dar profundidad */
+.sky__stars,
+.sky__stars::before,
+.sky__stars::after {
+  position: absolute;
+  inset: 0;
+}
+
+.sky__stars {
+  opacity: var(--stars-opacity);
+  transition: opacity 0.8s ease;
+  background-image:
+    radial-gradient(1px 1px at 4% 12%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 11% 47%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 17% 81%, #dbe4ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 23% 29%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 31% 64%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 38% 8%, #dbe4ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 46% 41%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 52% 88%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 59% 22%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 66% 57%, #dbe4ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 73% 5%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 79% 72%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 86% 36%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 93% 91%, #dbe4ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 97% 18%, #fff 50%, transparent 51%);
+  background-size: 360px 360px;
+}
+
+.sky__stars::before {
+  content: '';
+  background-image:
+    radial-gradient(1.5px 1.5px at 8% 33%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 21% 74%, #ffeccc 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 34% 15%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 49% 58%, #cfdcff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 63% 27%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 77% 83%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 88% 44%, #ffeccc 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 95% 6%, #fff 50%, transparent 51%);
+  background-size: 620px 620px;
+}
+
+.sky__stars::after {
+  content: '';
+  background-image:
+    radial-gradient(2.5px 2.5px at 14% 22%, #fff 40%, rgba(180, 200, 255, 0.35) 60%, transparent 70%),
+    radial-gradient(2.5px 2.5px at 42% 68%, #fff 40%, rgba(255, 220, 180, 0.35) 60%, transparent 70%),
+    radial-gradient(3px 3px at 71% 18%, #fff 40%, rgba(180, 200, 255, 0.4) 60%, transparent 70%),
+    radial-gradient(2.5px 2.5px at 89% 61%, #fff 40%, rgba(180, 200, 255, 0.35) 60%, transparent 70%);
+  background-size: 980px 980px;
+}
+
+.sky__shooting {
+  position: absolute;
+  width: 140px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0));
+  opacity: 0;
+  transform: rotate(-24deg);
+  visibility: hidden;
+}
+
+:root[data-theme='dark'] .sky__shooting {
+  visibility: visible;
+}
+
+.sky__shooting--1 {
+  top: 14%;
+  left: 62%;
+}
+
+.sky__shooting--2 {
+  top: 38%;
+  left: 22%;
+}
+
+/* Superficie de vidrio con luz que sigue al cursor y borde degradado */
+.glass {
+  position: relative;
+  isolation: isolate;
+  background: var(--surface-fallback);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glass {
+    background: var(--surface);
+    -webkit-backdrop-filter: var(--blur);
+    backdrop-filter: var(--blur);
+  }
+}
+
+.glass--interactive::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--spotlight), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.glass--interactive::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-sunset);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.glass--interactive:hover::before,
+.glass--interactive:hover::after {
+  opacity: 1;
+}
+
+/* Barra superior */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--topbar-h);
+  border-width: 0 0 1px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.topbar__inner {
+  max-width: 1360px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--gap);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: start;
+}
+
+.brand__mark {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 13px;
+  color: var(--accent-ink);
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-float);
+}
+
+.brand__mark::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+
+.brand__mark .icon {
+  width: 26px;
+  height: 26px;
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: end;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Estado de la conexión WebSocket: el cliente cambia data-status */
+.status[data-status='connecting'] {
+  background: color-mix(in srgb, var(--accent-3) 14%, transparent);
+  color: var(--accent-3);
+}
+
+.status[data-status='offline'] {
+  background: color-mix(in srgb, #e5484d 14%, transparent);
+  color: #e5484d;
+}
+
+.status[data-status='connecting'] .status__dot,
+.status[data-status='offline'] .status__dot {
+  animation: none;
+}
+
+.theme-toggle {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--surface-strong);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-spring), border-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(-12deg) scale(1.06);
+  border-color: var(--accent);
+}
+
+.theme-toggle:focus-visible,
+.nav__link:focus-visible,
+.composer__send:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 0 1px var(--accent);
+}
+
+.theme-toggle .icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.5s var(--ease-spring), opacity 0.3s ease;
+}
+
+.theme-toggle__moon {
+  transform: translateY(140%) rotate(-60deg);
+  opacity: 0;
+}
+
+:root[data-theme='dark'] .theme-toggle__sun {
+  transform: translateY(-140%) rotate(60deg);
+  opacity: 0;
+}
+
+:root[data-theme='dark'] .theme-toggle__moon {
+  transform: none;
+  opacity: 1;
+}
+
+/* Navegación entre módulos: arriba en escritorio y tablet, barra inferior en móvil */
+.nav {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  padding: 5px;
+  border-radius: var(--radius-full);
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+}
+
+.nav__indicator {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 0;
+  width: 0;
+  border-radius: var(--radius-full);
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-float);
+  transform: translateX(var(--nav-x, 5px));
+  width: var(--nav-w, 0);
+  transition: transform 0.45s var(--ease-spring), width 0.45s var(--ease-spring);
+}
+
+.nav__link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-soft);
+  transition: color 0.3s ease;
+}
+
+.nav__link:hover {
+  color: var(--ink);
+}
+
+.nav__link.is-active {
+  color: var(--accent-ink);
+}
+
+/* Layout: un módulo a la vez en todos los tamaños; sin JavaScript se muestran apilados */
+.layout {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: var(--gap);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--gap);
+}
+
+.module {
+  min-width: 0;
+  width: 100%;
+  justify-self: center;
+  scroll-margin-top: calc(var(--topbar-h) + 12px);
+}
+
+.module--feed {
+  max-width: 760px;
+}
+
+.module--chat {
+  max-width: 820px;
+}
+
+.js-tabs .module:not(.is-active) {
+  display: none;
+}
+
+.module__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.module__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.module__badge {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.module__badge .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  background: var(--surface-sunken);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+
+.pill--live {
+  background: var(--success-soft);
+  color: var(--success);
+  border-color: transparent;
+}
+
+/* Módulo de clima */
+.weather {
+  overflow: hidden;
+}
+
+/* El cielo de la tarjeta representa el clima real, por eso no depende del tema de la interfaz */
+.weather__hero {
+  --weather-sky: linear-gradient(165deg, #69b3ff 0%, #3b7bff 50%, #6a5cf0 100%);
+  --sun-hi: #fffbe6;
+  --sun-core: #ffd45e;
+  --sun-edge: #ffa42b;
+  --sun-shade: #e8670f;
+  --sun-inset: rgba(196, 72, 0, 0.45);
+  --sun-glow: rgba(255, 176, 60, 0.65);
+  --cloud-hi: #ffffff;
+  --cloud-mid: #eef3ff;
+  --cloud-low: #c3cfec;
+  --cloud-inset: rgba(70, 95, 170, 0.28);
+  --cloud-shadow: rgba(16, 36, 110, 0.38);
+  --hero-stars: 0;
+  --wind-speed: 10;
+  --wind-duration: calc(60s / (var(--wind-speed) + 6));
+  position: relative;
+  min-height: 250px;
+  padding: 22px;
+  color: #ffffff;
+  background: var(--weather-sky);
+  overflow: hidden;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* Variante de noche: se activa con el dato real de día o noche, no con el tema */
+.weather__hero--night {
+  --weather-sky: linear-gradient(165deg, #1b2a6b 0%, #241a5c 55%, #3b1d6e 100%);
+  --sun-hi: #ffffff;
+  --sun-core: #eeecff;
+  --sun-edge: #c8c1ff;
+  --sun-shade: #8d85d6;
+  --sun-inset: rgba(70, 60, 150, 0.5);
+  --sun-glow: rgba(196, 186, 255, 0.45);
+  --cloud-hi: #c9d0f5;
+  --cloud-mid: #8f99d0;
+  --cloud-low: #4d558f;
+  --cloud-inset: rgba(20, 20, 70, 0.4);
+  --cloud-shadow: rgba(5, 5, 30, 0.5);
+  --hero-stars: 1;
+}
+
+.weather__stars {
+  position: absolute;
+  inset: 0;
+  opacity: var(--hero-stars);
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 45% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 70% 60%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 85% 25%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 12% 70%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 58% 82%, #fff 50%, transparent 51%);
+  transition: opacity 0.8s ease;
+}
+
+.weather__label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.18);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.weather__city {
+  position: relative;
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.weather__region {
+  position: relative;
+  font-size: var(--fs-sm);
+  opacity: 0.85;
+}
+
+.weather__temp {
+  position: relative;
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: var(--fs-temp);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  text-shadow: 0 10px 30px rgba(10, 20, 60, 0.25);
+}
+
+.weather__temp sup {
+  font-size: 0.38em;
+  vertical-align: top;
+  margin-left: 4px;
+  letter-spacing: 0;
+}
+
+/* Ilustración en capas: cada capa se desplaza distinto al inclinar la tarjeta (parallax) */
+.weather__art {
+  position: absolute;
+  bottom: 14px;
+  right: 4px;
+  width: 160px;
+  height: 140px;
+  pointer-events: none;
+}
+
+.weather__layer {
+  position: absolute;
+  translate: calc(var(--tilt-x, 0) * var(--depth)) calc(var(--tilt-y, 0) * var(--depth));
+  transition: translate 0.2s linear;
+}
+
+/* Sol como esfera: brillo arriba a la izquierda, sombra interna abajo a la derecha */
+.weather__sun {
+  --depth: 6px;
+  top: 10px;
+  right: 18px;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 26%, var(--sun-hi) 0%, transparent 30%),
+    radial-gradient(circle at 40% 38%, var(--sun-core) 0%, var(--sun-edge) 60%, var(--sun-shade) 100%);
+  box-shadow:
+    inset -9px -11px 18px var(--sun-inset),
+    inset 5px 6px 10px rgba(255, 255, 255, 0.5),
+    0 0 0 10px color-mix(in srgb, var(--sun-glow) 25%, transparent),
+    0 0 60px var(--sun-glow);
+}
+
+.weather__sun::before {
+  content: '';
+  position: absolute;
+  inset: -26px;
+  z-index: -1;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 220, 130, 0.5) 0deg 5deg, transparent 5deg 30deg);
+  -webkit-mask: radial-gradient(circle, transparent 46%, #000 48%, transparent 72%);
+  mask: radial-gradient(circle, transparent 46%, #000 48%, transparent 72%);
+  filter: blur(0.6px);
+  transition: opacity 0.6s ease;
+}
+
+/* Cráteres de la luna, visibles solo en la variante de noche */
+.weather__sun::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 62% 38%, rgba(120, 110, 200, 0.45) 0 7px, transparent 8px),
+    radial-gradient(circle at 38% 64%, rgba(120, 110, 200, 0.35) 0 5px, transparent 6px),
+    radial-gradient(circle at 66% 70%, rgba(120, 110, 200, 0.3) 0 3px, transparent 4px);
+  transition: opacity 0.6s ease;
+}
+
+.weather__hero--night .weather__sun::before {
+  opacity: 0;
+}
+
+.weather__hero--night .weather__sun::after {
+  opacity: 1;
+}
+
+/* Nube con volumen: base y tres bolas sombreadas que se superponen */
+.weather__cloud {
+  width: 104px;
+  height: 62px;
+  filter: drop-shadow(0 14px 14px var(--cloud-shadow));
+}
+
+.weather__cloud--front {
+  --depth: 14px;
+  bottom: 20px;
+  left: 16px;
+}
+
+.weather__cloud--back {
+  --depth: 3px;
+  top: 0;
+  left: 18px;
+  opacity: 0.85;
+  scale: 0.62;
+}
+
+.weather__cloud::before,
+.cloud__puff {
+  position: absolute;
+  background: radial-gradient(circle at 36% 28%, var(--cloud-hi) 0%, var(--cloud-mid) 45%, var(--cloud-low) 100%);
+  box-shadow:
+    inset -5px -7px 12px var(--cloud-inset),
+    inset 3px 4px 6px rgba(255, 255, 255, 0.7);
+}
+
+.weather__cloud::before {
+  content: '';
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 32px;
+  border-radius: 32px;
+  background: linear-gradient(180deg, var(--cloud-hi) 0%, var(--cloud-mid) 45%, var(--cloud-low) 100%);
+}
+
+.cloud__puff {
+  border-radius: 50%;
+}
+
+.cloud__puff:nth-child(1) {
+  left: 10px;
+  bottom: 12px;
+  width: 40px;
+  height: 40px;
+}
+
+.cloud__puff:nth-child(2) {
+  left: 34px;
+  bottom: 14px;
+  width: 52px;
+  height: 52px;
+}
+
+.cloud__puff:nth-child(3) {
+  left: 68px;
+  bottom: 10px;
+  width: 32px;
+  height: 32px;
+}
+
+.weather__gusts {
+  position: absolute;
+  inset: auto 0 18px 0;
+  height: 60px;
+  pointer-events: none;
+}
+
+.weather__gust {
+  position: absolute;
+  left: -40%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+}
+
+.weather__gust:nth-child(1) {
+  top: 8px;
+  width: 38%;
+}
+
+.weather__gust:nth-child(2) {
+  top: 28px;
+  width: 26%;
+  animation-delay: calc(var(--wind-duration) * -0.4);
+}
+
+.weather__gust:nth-child(3) {
+  top: 46px;
+  width: 32%;
+  animation-delay: calc(var(--wind-duration) * -0.75);
+}
+
+.weather__body {
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.weather__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stat {
+  padding: 13px;
+  border-radius: var(--radius-md);
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
+}
+
+.stat__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.stat__value {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.stat__value small {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.stat__meter {
+  position: relative;
+  height: 6px;
+  margin-top: 10px;
+  border-radius: var(--radius-full);
+  background: var(--surface-sunken);
+  overflow: hidden;
+}
+
+.stat__meter span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--level, 50%);
+  border-radius: inherit;
+}
+
+.stat--temp .icon {
+  color: var(--accent-3);
+}
+
+.stat--temp .stat__meter span {
+  background: linear-gradient(90deg, #5bb3ff, #ffcf5b, #ff7a4d);
+}
+
+.stat--wind .icon {
+  color: var(--accent);
+}
+
+.stat--wind .stat__meter span {
+  background: linear-gradient(90deg, #8fd3ff, var(--accent), var(--accent-2));
+}
+
+.weather__details {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  font-size: var(--fs-sm);
+}
+
+.weather__details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.weather__details dt {
+  color: var(--ink-muted);
+}
+
+.weather__details dd {
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.weather__source {
+  font-size: var(--fs-xs);
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+/* Mensaje amable cuando una API falla */
+.weather-empty {
+  padding: 16px;
+}
+
+.notice {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-line);
+  color: var(--warning-ink);
+  font-size: var(--fs-sm);
+}
+
+.notice .icon {
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+}
+
+.notice__title {
+  font-weight: 700;
+}
+
+/* Módulo del feed */
+.feed {
+  display: grid;
+  gap: 16px;
+}
+
+.feed__head {
+  padding: 22px 24px;
+  overflow: hidden;
+}
+
+.feed__head::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: var(--gradient-sunset);
+  filter: blur(60px);
+  opacity: 0.25;
+  z-index: -1;
+}
+
+.feed__title {
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.feed__intro {
+  margin-top: 6px;
+  color: var(--ink-soft);
+}
+
+.feed__cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 11px 16px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.3s var(--ease-out);
+}
+
+.feed__cta strong {
+  font-weight: 700;
+}
+
+.feed__cta-arrow {
+  margin-left: auto;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.feed__cta:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.feed__cta:hover .feed__cta-arrow {
+  transform: translateX(4px);
+}
+
+.feed__cta:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 0 1px var(--accent);
+}
+
+.post {
+  padding: 20px 22px;
+}
+
+.post:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+.post__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.post__name {
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.post__handle {
+  font-size: var(--fs-sm);
+  color: var(--ink-muted);
+}
+
+.post__number {
+  margin-left: auto;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.post__title {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.post__title::first-letter,
+.post__body::first-letter {
+  text-transform: uppercase;
+}
+
+.post__body {
+  margin-top: 8px;
+  color: var(--ink-soft);
+}
+
+.avatar {
+  --hue: var(--accent);
+  position: relative;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  background: var(--hue);
+  box-shadow: 0 0 0 3px var(--surface-solid), 0 0 0 5px color-mix(in srgb, var(--hue) 35%, transparent);
+}
+
+.avatar--sm {
+  width: 32px;
+  height: 32px;
+  font-size: 0.7rem;
+  box-shadow: none;
+}
+
+.avatar--1 { --hue: #3b6cff; }
+.avatar--2 { --hue: #7c3aed; }
+.avatar--3 { --hue: #e0457b; }
+.avatar--4 { --hue: #f06a2c; }
+.avatar--5 { --hue: #0e9f8e; }
+.avatar--6 { --hue: #0a94c2; }
+.avatar--7 { --hue: #5c9d12; }
+.avatar--8 { --hue: #c13ad6; }
+.avatar--9 { --hue: #5148e5; }
+.avatar--10 { --hue: #c27610; }
+
+/* Módulo del chat */
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--topbar-h) - var(--gap) * 2);
+  height: calc(100dvh - var(--topbar-h) - var(--gap) * 2);
+  min-height: 380px;
+  overflow: hidden;
+}
+
+/* Borde cónico que gira mientras el usuario escribe */
+.chat::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--border-angle), var(--accent), transparent 30%, var(--accent-2), transparent 70%, var(--accent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.chat:focus-within::after {
+  opacity: 1;
+}
+
+/* Inclinación 3D sutil de la tarjeta de clima */
+.weather.has-tilt {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.55s var(--ease-out), background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.weather.has-tilt:hover {
+  transition-duration: 0.15s;
+}
+
+.chat__head {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.chat__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.chat__empty {
+  margin: auto;
+  max-width: 300px;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--ink-muted);
+}
+
+.chat__empty .module__badge {
+  margin-bottom: 4px;
+}
+
+.chat__empty-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.chat__system {
+  align-self: center;
+  padding: 5px 13px;
+  border-radius: var(--radius-full);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 88%;
+}
+
+.message__content {
+  min-width: 0;
+}
+
+.message__meta {
+  display: flex;
+  gap: 6px;
+  margin: 0 0 4px 14px;
+  font-size: var(--fs-xs);
+  color: var(--ink-muted);
+}
+
+.message__author {
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.message__bubble {
+  padding: 10px 15px;
+  border-radius: 20px 20px 20px 6px;
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.message--own {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.message--own .message__meta {
+  justify-content: flex-end;
+  margin: 0 14px 4px 0;
+}
+
+.message--own .message__bubble {
+  border-radius: 20px 20px 6px 20px;
+  border-color: transparent;
+  color: var(--accent-ink);
+  background: var(--gradient-brand);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+/* Formulario con la misma estructura que un post: autor arriba, texto abajo */
+.composer {
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--line);
+}
+
+/* Filas separadas por líneas de borde a borde, al estilo de la redacción de Gmail */
+.composer__card {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-strong);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.4s ease;
+}
+
+.composer__card:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.composer__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  transition: background-color 0.25s ease;
+}
+
+.composer__head:focus-within,
+.composer__body:focus-within {
+  background: var(--accent-soft);
+}
+
+.composer__label {
+  flex: none;
+  min-width: 22px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.composer__body {
+  padding: 12px 14px;
+  transition: background-color 0.25s ease;
+}
+
+.composer__avatar {
+  transition: background-color 0.3s ease;
+}
+
+.composer__name,
+.composer__text {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+}
+
+.composer__name {
+  font-weight: 700;
+}
+
+.composer__text {
+  min-height: 48px;
+  resize: none;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.composer__name::placeholder,
+.composer__text::placeholder {
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.composer__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+}
+
+.composer__count {
+  font-size: var(--fs-xs);
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.composer__count.is-near {
+  color: var(--accent-3);
+  font-weight: 600;
+}
+
+.composer__send {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border: 0;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-float);
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.composer__send .icon {
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.composer__send:hover {
+  transform: translateY(-2px);
+}
+
+.composer__send:hover .icon {
+  transform: translate(2px, -2px) rotate(-8deg);
+}
+
+.composer__send:active {
+  transform: scale(0.95);
+}
+
+.footer__link {
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--gradient-sunset) left bottom / 0 2px no-repeat;
+  transition: background-size 0.35s var(--ease-out), color 0.2s ease;
+}
+
+.footer__link:hover {
+  background-size: 100% 2px;
+}
+
+.footer__link:focus-visible {
+  outline: none;
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 0 1px var(--accent);
+}
+
+.footer {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 6px var(--gap) 30px;
+  font-size: var(--fs-xs);
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+/* Pantalla ancha: el clima se divide en ilustración y datos, lado a lado */
+@media (min-width: 900px) {
+  .weather {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  }
+
+  .weather__hero {
+    min-height: 400px;
+    padding: 32px;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  }
+
+  .weather__city {
+    font-size: 2.4rem;
+  }
+
+  .weather__temp {
+    font-size: 6.5rem;
+  }
+
+  .weather__art {
+    right: 28px;
+    bottom: 34px;
+    scale: 1.55;
+    transform-origin: bottom right;
+  }
+
+  .weather__body {
+    padding: 28px;
+    align-content: center;
+    gap: 16px;
+  }
+}
+
+/* Móvil: la navegación baja a una barra inferior tipo app */
+@media (max-width: 760px) {
+  :root {
+    --gap: 14px;
+    --topbar-h: 60px;
+  }
+
+  /* Al enfocar un campo, el navegador lo deja por encima de la barra inferior fija */
+  html {
+    scroll-padding-bottom: calc(var(--tabbar-h) + 24px);
+  }
+
+  .topbar__inner {
+    grid-template-columns: 1fr auto;
+  }
+
+  /* backdrop-filter convierte la barra en contenedor de los fixed; sin él la navegación baja a la pantalla */
+  .topbar {
+    background: var(--surface-fallback);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .nav {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 30;
+    justify-content: space-around;
+    padding: 6px;
+    border-radius: 22px;
+    background: var(--surface-fallback);
+    border-color: var(--surface-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .nav {
+      background: var(--surface-strong);
+      -webkit-backdrop-filter: var(--blur);
+      backdrop-filter: var(--blur);
+    }
+  }
+
+  .nav__indicator {
+    top: 6px;
+    bottom: 6px;
+    border-radius: 16px;
+  }
+
+  .nav__link {
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 4px;
+    border-radius: 16px;
+    font-size: 0.7rem;
+  }
+
+  .nav__link .icon {
+    width: 21px;
+    height: 21px;
+  }
+
+  .status__label {
+    display: none;
+  }
+
+  .status {
+    padding: 7px;
+  }
+
+  .brand__name {
+    font-size: 1.25rem;
+  }
+
+  .layout {
+    padding-bottom: calc(var(--tabbar-h) + 30px);
+  }
+
+  .chat {
+    height: calc(100vh - var(--topbar-h) - var(--tabbar-h) - 60px);
+    height: calc(100dvh - var(--topbar-h) - var(--tabbar-h) - 60px);
+    min-height: 380px;
+  }
+
+  .weather__hero {
+    min-height: 230px;
+  }
+
+  .post {
+    padding: 18px;
+  }
+
+  .footer {
+    padding-bottom: calc(var(--tabbar-h) + 30px);
+  }
+}
+
+/* Teléfonos angostos: la ilustración se achica para no tapar el nombre de la ciudad */
+@media (max-width: 420px) {
+  .weather__hero {
+    min-height: 260px;
+  }
+
+  .weather__art {
+    scale: 0.72;
+    transform-origin: bottom right;
+  }
+
+  /* Formulario más compacto para que el área de mensajes tenga más espacio */
+  .chat {
+    height: calc(100dvh - var(--topbar-h) - var(--tabbar-h) - 44px);
+  }
+
+  .chat__head {
+    padding: 12px 14px;
+  }
+
+  .composer {
+    padding: 10px 12px 12px;
+  }
+
+  .composer__head {
+    padding: 8px 12px;
+  }
+
+  .composer__body {
+    padding: 10px 12px;
+  }
+
+  .composer__text {
+    min-height: 36px;
+  }
+
+  .composer__foot {
+    padding: 8px 12px;
+  }
+
+  .composer__send {
+    padding: 8px 16px;
+  }
+}
+
+/* Pantallas bajas (teléfono en horizontal): el chat crece natural y la página hace scroll */
+@media (max-height: 500px) {
+  :root {
+    --topbar-h: 56px;
+  }
+
+  .chat {
+    height: auto;
+    min-height: 0;
+  }
+
+  .chat__messages {
+    max-height: 240px;
+  }
+
+  .chat__head {
+    padding: 10px 16px;
+  }
+
+  .composer {
+    padding: 10px 14px 12px;
+    gap: 8px;
+  }
+}

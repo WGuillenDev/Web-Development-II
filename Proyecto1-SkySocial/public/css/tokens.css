@@ -1,0 +1,126 @@
+/* Fuentes variables locales: un solo archivo cubre todos los grosores */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/assets/fonts/bricolage-grotesque-latin.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('/assets/fonts/figtree-latin.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+
+  --bg: #edf4ff;
+  --bg-top: #d6e7ff;
+  --bg-bottom: #f8fbff;
+  --blob-1: #9cc8ff;
+  --blob-2: #c8b6ff;
+  --blob-3: #ffc6a3;
+  --stars-opacity: 0;
+
+  --surface: rgba(255, 255, 255, 0.58);
+  --surface-strong: rgba(255, 255, 255, 0.78);
+  --surface-solid: #ffffff;
+  --surface-fallback: rgba(255, 255, 255, 0.94);
+  --surface-border: rgba(255, 255, 255, 0.75);
+  --surface-sunken: rgba(15, 27, 58, 0.04);
+
+  --ink: #0e1730;
+  --ink-soft: #4a5672;
+  --ink-muted: #8090ab;
+  --line: rgba(14, 23, 48, 0.08);
+  --line-strong: rgba(14, 23, 48, 0.16);
+
+  --accent: #3b6cff;
+  --accent-hover: #2d58e6;
+  --accent-2: #8b5cf6;
+  --accent-3: #ff8a5b;
+  --accent-soft: rgba(59, 108, 255, 0.12);
+  --accent-ink: #ffffff;
+  --gradient-brand: linear-gradient(135deg, #4f8bff 0%, #3b6cff 45%, #8b5cf6 100%);
+  --gradient-sunset: linear-gradient(120deg, #3b6cff 0%, #8b5cf6 55%, #ff8a5b 100%);
+
+  --success: #12a150;
+  --success-soft: rgba(18, 161, 80, 0.12);
+  --warning-bg: #fff4e5;
+  --warning-ink: #9a4b00;
+  --warning-line: #ffd6a3;
+
+  --spotlight: rgba(59, 108, 255, 0.1);
+  --shadow-card: 0 1px 2px rgba(14, 23, 48, 0.04), 0 10px 30px rgba(14, 23, 48, 0.07);
+  --shadow-lift: 0 2px 6px rgba(14, 23, 48, 0.06), 0 22px 44px rgba(59, 108, 255, 0.14);
+  --shadow-float: 0 14px 34px rgba(59, 108, 255, 0.32);
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Figtree', system-ui, sans-serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.84rem;
+  --fs-base: 0.95rem;
+  --fs-md: 1.1rem;
+  --fs-lg: 1.3rem;
+  --fs-xl: 1.75rem;
+  --fs-temp: clamp(4rem, 7vw, 5.25rem);
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+  --radius-full: 999px;
+  --blur: blur(20px) saturate(170%);
+
+  --topbar-h: 68px;
+  --tabbar-h: 70px;
+  --gap: 22px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #060a1a;
+  --bg-top: #0b1230;
+  --bg-bottom: #05070f;
+  --blob-1: #1f3a8a;
+  --blob-2: #4c1d95;
+  --blob-3: #0f5f73;
+  --stars-opacity: 1;
+
+  --surface: rgba(17, 25, 52, 0.55);
+  --surface-strong: rgba(24, 34, 68, 0.72);
+  --surface-solid: #121a36;
+  --surface-fallback: rgba(16, 23, 48, 0.95);
+  --surface-border: rgba(148, 170, 255, 0.14);
+  --surface-sunken: rgba(255, 255, 255, 0.04);
+
+  --ink: #e8edff;
+  --ink-soft: #a9b4d6;
+  --ink-muted: #7181a8;
+  --line: rgba(160, 180, 255, 0.1);
+  --line-strong: rgba(160, 180, 255, 0.2);
+
+  --accent: #6e8dff;
+  --accent-hover: #87a1ff;
+  --accent-2: #a78bfa;
+  --accent-3: #ff9e7a;
+  --accent-soft: rgba(110, 141, 255, 0.16);
+  --gradient-brand: linear-gradient(135deg, #6e8dff 0%, #5b6cff 45%, #a78bfa 100%);
+  --gradient-sunset: linear-gradient(120deg, #6e8dff 0%, #a78bfa 55%, #ff9e7a 100%);
+
+  --success: #3ddc84;
+  --success-soft: rgba(61, 220, 132, 0.14);
+  --warning-bg: rgba(255, 167, 38, 0.1);
+  --warning-ink: #ffc477;
+  --warning-line: rgba(255, 167, 38, 0.3);
+
+  --spotlight: rgba(140, 160, 255, 0.12);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.35), 0 24px 48px rgba(91, 108, 255, 0.22);
+  --shadow-float: 0 14px 34px rgba(91, 108, 255, 0.4);
+}
