@@ -137,6 +137,10 @@ La ilustración cambia con la hora real de la zona: sol de día, y luna con estr
 
 ## 6. Módulo Feed
 
+<p align="center">
+  <img src="capturas/07-feed-en-vivo.png" alt="Módulo Feed con publicaciones del chat arriba y publicaciones de la comunidad debajo" width="860">
+</p>
+
 El feed muestra las publicaciones de la comunidad. Arriba aparecen las que se escriben en el Chat global, de la más reciente a la más antigua; debajo, las publicaciones de la comunidad.
 
 | Tipo | Qué muestra |
@@ -178,13 +182,27 @@ Al entrar o recargar la página, el chat muestra los mensajes publicados desde q
 
 ## 8. Tema claro y oscuro
 
-<p align="center">
-  <img src="capturas/04-tema-oscuro.png" alt="SkySocial en tema oscuro con un cielo nocturno y estrellas" width="860">
-</p>
-
 El botón con el sol o la luna, a la derecha de la barra superior, cambia entre ambos temas con una transición circular. La preferencia se guarda en el navegador. Si nunca has elegido uno, la página usa el tema de tu sistema operativo.
 
-En el tema oscuro, el fondo se convierte en un cielo nocturno con estrellas que titilan.
+En el tema oscuro, el fondo se convierte en un cielo nocturno con estrellas que titilan y los paneles de vidrio se oscurecen. Así se ven los tres módulos:
+
+### Clima
+
+<p align="center">
+  <img src="capturas/04-oscuro-clima.png" alt="Módulo Clima en tema oscuro" width="860">
+</p>
+
+### Feed
+
+<p align="center">
+  <img src="capturas/04-oscuro-feed.png" alt="Módulo Feed en tema oscuro" width="860">
+</p>
+
+### Chat global
+
+<p align="center">
+  <img src="capturas/04-oscuro-chat.png" alt="Módulo Chat global en tema oscuro" width="860">
+</p>
 
 ---
 
