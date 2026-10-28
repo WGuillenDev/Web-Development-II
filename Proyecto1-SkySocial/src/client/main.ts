@@ -76,13 +76,25 @@ function updateFeedCount(): void {
   feedCount.textContent = String(Number(feedCount.dataset.base ?? 0) + feedLive.childElementCount);
 }
 
-function renderSystem(text: string): void {
-  if (!list) return;
+function renderSystem(text: string): HTMLElement | null {
+  if (!list) return null;
   const notice = document.createElement('p');
   notice.className = 'chat__system';
   notice.textContent = text;
   list.append(notice);
   scrollToBottom();
+  return notice;
+}
+
+// Un solo aviso de desconexión, aunque se intente publicar varias veces; se quita al reconectar
+let offlineNotice: HTMLElement | null = null;
+
+function showOfflineNotice(): void {
+  if (offlineNotice?.isConnected) {
+    scrollToBottom();
+    return;
+  }
+  offlineNotice = renderSystem('No se pudo publicar: no hay conexión con el servidor. Tu texto se conserva y la conexión se reintenta sola.');
 }
 
 // Al conectar (o reconectar) se reemplaza la lista con el historial del servidor.
@@ -120,7 +132,10 @@ function connect(): void {
   const protocol = location.protocol === 'https:' ? 'wss' : 'ws';
   socket = new WebSocket(`${protocol}://${location.host}`);
 
-  socket.addEventListener('open', () => setStatus('online'));
+  socket.addEventListener('open', () => {
+    setStatus('online');
+    offlineNotice?.remove();
+  });
 
   socket.addEventListener('message', (event: MessageEvent<string>) => {
     try {
@@ -152,7 +167,7 @@ function publish(): void {
   if (!author || !content) return;
 
   if (socket?.readyState !== WebSocket.OPEN) {
-    renderSystem('Sin conexión con el servidor. Reintentando…');
+    showOfflineNotice();
     return;
   }
 

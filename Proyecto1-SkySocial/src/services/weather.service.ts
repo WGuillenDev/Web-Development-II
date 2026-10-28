@@ -34,6 +34,6 @@ export async function getWeather(location: Location): Promise<Weather> {
     };
   } catch (error) {
     console.error('Error al consultar Open-Meteo:', error instanceof Error ? error.message : error);
-    throw new Error('No pudimos obtener el clima de tu zona en este momento. El resto de SkySocial sigue funcionando.');
+    throw new Error('No pudimos obtener el clima de tu zona. Revisa tu conexión a internet y recarga la página. Mientras tanto puedes usar el Chat global.');
   }
 }

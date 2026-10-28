@@ -223,18 +223,22 @@ La aplicación se adapta a pantallas desde 320 px de ancho:
 
 ## 10. Cuando algo falla
 
-SkySocial sigue funcionando aunque un servicio externo no responda. El módulo afectado muestra un aviso y los demás continúan disponibles.
+SkySocial no se detiene aunque un servicio externo no responda. Cada módulo afectado (Clima o Feed) muestra un aviso con lo que ocurrió y qué hacer, y el **Chat global** sigue funcionando porque no depende de esos servicios.
 
 <p align="center">
   <img src="capturas/05-error.png" alt="Aviso amigable cuando el servicio del clima no está disponible" width="860">
 </p>
 
+<p align="center">
+  <img src="capturas/05-error-feed.png" alt="Aviso amigable cuando el feed no se puede cargar" width="860">
+</p>
+
 | Situación | Qué verás | Qué hacer |
 | --- | --- | --- |
-| No responde el servicio del clima | Aviso **"El clima no está disponible"** | Recargar la página en unos minutos. |
+| No responde el servicio del clima | Aviso **"El clima no está disponible"** | Revisar la conexión a internet y recargar la página. El Chat global sigue disponible. |
 | No se pudo detectar la ubicación | El clima de San Carlos, la ubicación de respaldo | Nada: es el comportamiento esperado. |
-| No responde el servicio de publicaciones | Aviso **"No pudimos cargar el feed"** | Recargar la página en unos minutos. El chat sigue funcionando. |
-| El indicador está en rojo | **Desconectado** y un aviso en el chat al intentar publicar | Comprobar que el servidor siga encendido. La página se reconecta sola. |
+| No responde el servicio de publicaciones | Aviso **"No pudimos cargar el feed"** | Revisar la conexión a internet y recargar la página. El Chat global sigue disponible. |
+| El indicador está en rojo | **Desconectado** y, al intentar publicar, el aviso *"No se pudo publicar: no hay conexión con el servidor"*. Tu texto se conserva. | Comprobar que el servidor siga encendido. La página se reconecta sola y el aviso desaparece cuando vuelve la conexión; entonces vuelve a presionar **Publicar**. |
 | El botón **Publicar** no envía | Falta el nombre o el texto | Completar ambos campos. |
 
 ---

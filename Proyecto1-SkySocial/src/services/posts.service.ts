@@ -17,7 +17,7 @@ function showOriginalText(): boolean {
   return process.env.FEED_ORIGINAL === 'true';
 }
 
-const FRIENDLY_ERROR = 'El servicio de publicaciones no respondió. Intenta recargar la página en unos minutos.';
+const FRIENDLY_ERROR = 'No pudimos cargar las publicaciones de la comunidad. Revisa tu conexión a internet y recarga la página. Mientras tanto puedes usar el Chat global.';
 
 export async function getPosts(): Promise<Post[]> {
   try {
