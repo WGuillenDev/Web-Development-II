@@ -21,7 +21,7 @@
 1. [Introducción](#1-introducción)
 2. [Requisitos](#2-requisitos)
 3. [Instalación y arranque](#3-instalación-y-arranque)
-4. [Recorrido por la pantalla](#4-recorrido-por-la-pantalla)
+4. [Navegación](#4-navegación)
 5. [Módulo Clima](#5-módulo-clima)
 6. [Módulo Feed](#6-módulo-feed)
 7. [Módulo Chat global](#7-módulo-chat-global)
@@ -85,11 +85,7 @@ Esta parte es para quien ejecuta la aplicación en su computadora.
 
 ---
 
-## 4. Recorrido por la pantalla
-
-<p align="center">
-  <img src="capturas/01-feed.png" alt="Pantalla principal de SkySocial con el módulo Feed" width="860">
-</p>
+## 4. Navegación
 
 La página tiene tres zonas:
 
@@ -99,7 +95,12 @@ La página tiene tres zonas:
 | **Contenido** | El módulo elegido: Clima, Feed o Chat. |
 | **Pie de página** | La versión de la aplicación y el autor. |
 
-### Navegación
+### Menú de módulos
+
+<p align="center">
+  <img src="capturas/01-navegacion.png" alt="Barra de navegación con las píldoras Clima, Feed y Chat" width="360"><br>
+  <sub><strong>Navegación:</strong> píldoras Clima, Feed y Chat de la barra superior</sub>
+</p>
 
 Las píldoras **Clima**, **Feed** y **Chat** cambian de módulo sin recargar la página. La activa lleva un indicador de color que se desliza. La dirección del navegador cambia a `#clima`, `#feed` o `#chat`, de modo que puedes guardar el enlace directo a un módulo. Si abres la página sin indicar ninguno, se muestra el Feed.
 
