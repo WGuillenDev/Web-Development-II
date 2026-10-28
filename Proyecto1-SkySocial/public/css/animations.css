@@ -260,13 +260,9 @@
   }
 }
 
-/* Revelado de posts al hacer scroll, solo donde el navegador lo soporta */
-@supports (animation-timeline: view()) {
-  .post {
-    animation: rise linear backwards;
-    animation-timeline: view();
-    animation-range: entry 0% entry 35%;
-  }
+/* Solo las publicaciones nuevas animan su entrada; las demás quedan siempre visibles al hacer scroll */
+.post--live {
+  animation: pop 0.4s var(--ease-spring) backwards;
 }
 
 /* Transición circular al cambiar de tema */

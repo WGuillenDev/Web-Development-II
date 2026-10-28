@@ -114,14 +114,15 @@
     document.fonts?.ready.then(refresh);
   }
 
-  // Luz radial que sigue al cursor dentro de las tarjetas
+  // Luz radial que sigue al cursor dentro de las tarjetas; se escucha en el documento
+  // para que también funcione en las publicaciones que llegan en vivo
   function initSpotlight(): void {
-    document.querySelectorAll<HTMLElement>('.glass--interactive').forEach((card) => {
-      card.addEventListener('pointermove', (event) => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
-        card.style.setProperty('--my', `${event.clientY - rect.top}px`);
-      });
+    document.addEventListener('pointermove', (event) => {
+      const card = (event.target as Element).closest?.<HTMLElement>('.glass--interactive');
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${event.clientY - rect.top}px`);
     });
   }
 
@@ -192,53 +193,11 @@
     });
   }
 
-  // Iniciales y color del avatar a partir del nombre, igual que los autores del feed
-  function initialsOf(name: string): string {
-    const words = name.trim().split(/\s+/).filter(Boolean);
-    if (words.length === 0) return '?';
-    return words
-      .slice(0, 2)
-      .map((word) => word[0]!.toUpperCase())
-      .join('');
-  }
-
-  function avatarVariant(name: string): number {
-    let hash = 0;
-    for (const char of name.trim().toLowerCase()) hash = (hash * 31 + char.charCodeAt(0)) % 1000;
-    return (hash % 10) + 1;
-  }
-
-  // Vista previa del avatar y contador de caracteres del formulario
-  function initComposer(): void {
-    const name = document.querySelector<HTMLInputElement>('.composer__name');
-    const text = document.querySelector<HTMLTextAreaElement>('.composer__text');
-    const avatar = document.querySelector<HTMLElement>('.composer__avatar');
-    const count = document.querySelector<HTMLElement>('.composer__count');
-    if (!name || !text || !avatar || !count) return;
-
-    const renderAvatar = (): void => {
-      avatar.textContent = initialsOf(name.value);
-      avatar.className = avatar.className.replace(/\bavatar--\d+\b/g, '').trim();
-      if (name.value.trim()) avatar.classList.add(`avatar--${avatarVariant(name.value)}`);
-    };
-
-    const renderCount = (): void => {
-      count.textContent = `${text.value.length} / ${text.maxLength}`;
-      count.classList.toggle('is-near', text.value.length >= text.maxLength * 0.9);
-    };
-
-    name.addEventListener('input', renderAvatar);
-    text.addEventListener('input', renderCount);
-    renderAvatar();
-    renderCount();
-  }
-
   document.addEventListener('DOMContentLoaded', () => {
     safe(initThemeToggle, 'el cambio de tema');
     safe(initModules, 'la navegación');
     safe(initSpotlight, 'el efecto de luz');
     safe(initTilt, 'la inclinación 3D');
     safe(initCountUp, 'el contador');
-    safe(initComposer, 'el formulario');
   });
 })();

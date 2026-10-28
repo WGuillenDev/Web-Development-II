@@ -3,7 +3,7 @@
     <header class="feed__head glass">
       <div class="module__head">
         <span class="pill"><svg class="icon"><use href="#i-feed"/></svg>Feed social</span>
-        <span class="pill"><%= posts.length %> publicaciones</span>
+        <span class="pill"><span id="feed-count" data-base="<%= posts.length %>"><%= posts.length %></span> publicaciones</span>
       </div>
       <h2 class="feed__title" id="feed-title">Publicaciones de la <span class="text-gradient">comunidad</span></h2>
       <p class="feed__intro">Lee lo que comparten los usuarios de SkySocial, con el nombre de cada autor.</p>
@@ -13,6 +13,21 @@
         <svg class="icon feed__cta-arrow"><use href="#i-arrow"/></svg>
       </a>
     </header>
+
+    <template id="post-template">
+      <article class="post post--live glass glass--interactive">
+        <div class="post__head">
+          <span class="avatar post__avatar"></span>
+          <div>
+            <p class="post__name"></p>
+            <p class="post__handle"></p>
+          </div>
+        </div>
+        <p class="post__body"></p>
+      </article>
+    </template>
+
+    <div class="feed__live" id="feed-live" aria-live="polite"></div>
 
     <% if (feedError) { %>
       <div class="notice">
