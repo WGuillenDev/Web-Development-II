@@ -33,7 +33,7 @@ Es el primer proyecto del curso **Programación en Ambiente Web II (ISW-621)** d
 | Módulo | Qué hace |
 | --- | --- |
 | **Clima** | Detecta la ubicación aproximada del usuario por su IP y consulta la temperatura y la velocidad del viento actuales para esas coordenadas. |
-| **Feed social** | Muestra las publicaciones de la comunidad, combinando el título y el contenido de cada post con el nombre de su autor. |
+| **Feed social** | Muestra las publicaciones de la comunidad, combinando el título y el contenido de cada post con el nombre de su autor. Las publicaciones del chat se suman arriba en tiempo real. |
 | **Chat global** | Permite publicar con un nombre y un texto. El servidor asigna un identificador único y la hora, y lo transmite en tiempo real a todos los clientes conectados. Quien se conecta después recibe el historial de la sesión. |
 | **Tolerancia a fallos** | Si una API externa no responde, la aplicación no se detiene: el módulo afectado muestra un mensaje claro y el resto sigue funcionando. |
 
@@ -114,6 +114,7 @@ flowchart LR
 - **Un solo puerto:** Express y el WebSocket comparten el mismo servidor HTTP de Node.
 - **Dos configuraciones de TypeScript:** el servidor compila para Node y el cliente para el navegador, con la librería `DOM`. Así el compilador avisa si se usa una API que no existe en el entorno.
 - **Fallos aislados:** cada API se consulta por separado y con su propio manejo de errores, para que la caída de una no afecte a las demás.
+- **Contenido en español:** JSONPlaceholder devuelve texto de relleno en pseudolatín. El servicio conserva los datos de la API (id, autor, ciudad) y reemplaza el título y el cuerpo por versiones en español guardadas en `src/data/posts.es.ts`, buscadas por el id del post. Con `FEED_ORIGINAL=true` en el `.env` se muestran los textos originales de la API.
 - **Seguridad:** el contenido dinámico se imprime escapado en EJS y se inserta con `textContent` en el navegador, lo que evita la inyección de HTML.
 - **Rendimiento:** fuentes variables alojadas localmente, ilustraciones hechas con CSS en lugar de imágenes y versión en los recursos estáticos para evitar cachés desactualizadas.
 
@@ -137,7 +138,8 @@ cp .env.example .env
 | --- | --- | --- |
 | `PORT` | Puerto del servidor | `3000` |
 | `DEFAULT_LAT` / `DEFAULT_LON` | Coordenadas de respaldo si no se puede detectar la ubicación | San Carlos, Costa Rica |
-| `DEFAULT_CITY` | Ciudad de respaldo | `San Carlos` |
+| `DEFAULT_CITY` / `DEFAULT_REGION` / `DEFAULT_COUNTRY` | Ciudad, región y país de respaldo | `San Carlos`, `Alajuela`, `Costa Rica` |
+| `FEED_ORIGINAL` | Con `true`, el feed muestra el título y el contenido originales de JSONPlaceholder | `false` |
 
 Modo desarrollo, con recarga automática:
 
@@ -166,15 +168,17 @@ La aplicación queda disponible en `http://localhost:3000`.
 ## Estado del proyecto
 
 ```
-🟡 En desarrollo
+🟢 Completo
 ```
 
 - [x] Arquitectura, configuración de TypeScript y servidor Express
 - [x] Diseño de la interfaz, modo oscuro y adaptación a todos los tamaños
-- [ ] Tipos y servicios de las APIs externas
-- [ ] Ruta principal con manejo de errores
-- [ ] Publicaciones en tiempo real con WebSockets
-- [ ] Manual de usuario y capturas
+- [x] Tipos y servicios de las APIs externas
+- [x] Ruta principal con manejo de errores
+- [x] Publicaciones en tiempo real con WebSockets
+- [x] Manual de usuario y capturas
+
+El uso de la aplicación paso a paso está en el [manual de usuario](docs/manual-usuario.md).
 
 ---
 

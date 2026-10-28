@@ -144,3 +144,7 @@ vite.config.ts.timestamp-*
 
 # Impeccable tool artifacts
 .impeccable/
+
+# Configuracion local de Claude Code
+/.claude/
+/CLAUDE.md
