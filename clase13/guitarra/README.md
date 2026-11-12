@@ -148,7 +148,7 @@ El diseño se adapta a una sola columna en pantallas pequeñas.
 
 ## Ejecución
 
-Requiere Node.js 20 o superior.
+Requiere Node.js 20.19 o superior (o 22.12 o superior), según lo exige Vite 8.
 
 ```bash
 cd clase13/guitarra
