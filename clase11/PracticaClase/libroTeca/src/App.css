@@ -1,0 +1,424 @@
+.aplicacion {
+  min-height: 100vh;
+}
+
+.encabezado {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 84px;
+  padding: 10px 24px;
+  background: #fff;
+  box-shadow: 0 3px 12px #15344b1a;
+}
+
+.logo-libro {
+  flex-shrink: 0;
+  width: 60px;
+  height: 51px;
+  background: url('/libros-referencia.png') -10px 0 / 692px 339px no-repeat;
+}
+
+.encabezado h1 {
+  margin: 0;
+  color: #123247;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+.encabezado h1 span {
+  color: #b2984d;
+}
+
+.contenido {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  min-height: calc(100vh - 84px);
+}
+
+.categorias {
+  padding: 66px 22px 24px;
+  background: #fff;
+  border-right: 1px solid #d4dfe4;
+}
+
+.categorias h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 12px;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+
+.categorias h2 span {
+  font-size: 24px;
+}
+
+.categorias ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.categoria {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  padding: 4px 7px;
+  margin-bottom: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.categoria:hover {
+  background: #eef6fb;
+}
+
+.categoria.seleccionada {
+  background: #d9ecf8;
+}
+
+.categoria input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #2579af;
+  cursor: pointer;
+}
+
+.pie-categorias {
+  margin-top: 23px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+}
+
+.limpiar {
+  padding: 0;
+  border: 0;
+  color: #246f9f;
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 14px;
+}
+
+.catalogo {
+  min-width: 0;
+  padding: 26px 24px;
+  background: linear-gradient(135deg, #eff7fb, #e5f1f7);
+}
+
+.titulo-catalogo {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+.titulo-catalogo h2 {
+  margin: 0;
+  font-size: 21px;
+  text-transform: uppercase;
+}
+
+.titulo-catalogo p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.rejilla-libros {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 16px;
+  max-width: 900px;
+}
+
+.tarjeta-libro {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid #e3e9ef;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 10px #173a531c;
+}
+
+.fondo-portada {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: linear-gradient(110deg, #f0eff5, #fafafa, #efeff5);
+}
+
+/* Las portadas y el logo usan la imagen incluida en la diapositiva 16.
+   El fondo se desplaza para mostrar únicamente cada portada. */
+.portada {
+  flex-shrink: 0;
+  width: 90px;
+  height: 130px;
+  transform: scale(1.5);
+  background-image: url('/libros-referencia.png');
+  background-size: 692px 339px;
+  background-repeat: no-repeat;
+  box-shadow: 2px 4px 7px #0003;
+}
+
+.portada-misterio {
+  background-position: -250px -119px;
+}
+
+.portada-viento {
+  background-position: -410px -119px;
+}
+
+.portada-codigo {
+  width: 84px;
+  background-position: -570px -119px;
+}
+
+.datos-libro {
+  padding: 10px 1px 0;
+}
+
+.fila-titulo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.fila-titulo h3 {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  margin: 0;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.valoracion {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.valoracion span {
+  margin-left: 1px;
+  color: #d9ac30;
+}
+
+.autor,
+.genero {
+  margin: 3px 0 0;
+  font-size: 14px;
+}
+
+.acciones-libro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.boton-detalles {
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  background: #287caf;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.boton-detalles:hover {
+  background: #1b5f8a;
+}
+
+.boton-icono {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 36px;
+  min-height: 44px;
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: #17232b;
+  font-size: 10px;
+}
+
+.boton-icono[aria-pressed='true'] {
+  color: #287caf;
+}
+
+.simbolo-anadir {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.corazon {
+  font-size: 25px;
+  line-height: 19px;
+}
+
+.estado {
+  min-height: 22px;
+  margin-top: 18px;
+  color: #245574;
+  font-size: 14px;
+}
+
+.sin-resultados {
+  max-width: 600px;
+  padding: 32px;
+  border: 1px dashed #b1cbdc;
+  border-radius: 12px;
+  background: #ffffffb3;
+}
+
+.sin-resultados h3 {
+  margin-top: 0;
+}
+
+.sin-resultados p {
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.detalle-libro {
+  width: min(460px, calc(100% - 32px));
+  padding: 30px;
+  border: 0;
+  border-radius: 14px;
+  box-shadow: 0 20px 80px #102c4140;
+}
+
+.detalle-libro::backdrop {
+  background: #102c4199;
+}
+
+.detalle-libro h2 {
+  margin: 10px 0;
+  color: #123247;
+}
+
+.detalle-libro p {
+  line-height: 1.6;
+}
+
+.detalle-categoria,
+.detalle-autor {
+  color: #567080;
+}
+
+.detalle-valoracion {
+  color: #9a751d;
+  font-weight: bold;
+}
+
+@media (min-width: 1450px) {
+  .catalogo {
+    padding: 30px 36px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .contenido {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  .catalogo {
+    padding: 24px 16px;
+  }
+
+  .rejilla-libros {
+    gap: 10px;
+  }
+
+  .fondo-portada {
+    height: 170px;
+  }
+
+  .portada {
+    transform: scale(1.15);
+  }
+
+  .acciones-libro {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 700px) {
+  .encabezado {
+    min-height: 74px;
+    padding: 10px 16px;
+  }
+
+  .encabezado h1 {
+    font-size: 28px;
+  }
+
+  .contenido {
+    grid-template-columns: 1fr;
+  }
+
+  .categorias {
+    padding: 20px 16px 12px;
+    border-right: 0;
+    border-bottom: 1px solid #d4dfe4;
+  }
+
+  .categorias h2 {
+    font-size: 15px;
+  }
+
+  .categorias ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+
+  .pie-categorias {
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+
+  .pie-categorias:empty {
+    display: none;
+  }
+
+  .rejilla-libros {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .titulo-catalogo h2 {
+    font-size: 19px;
+  }
+
+  .titulo-catalogo p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .rejilla-libros {
+    grid-template-columns: 1fr;
+  }
+}
