@@ -1,0 +1,19 @@
+{
+  "name": "clase14-libreria-postgresql",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "backend-libreria",
+    "frontend-libreria"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n API,WEB \"npm run dev -w backend-libreria\" \"npm run dev -w frontend-libreria\"",
+    "check": "tsc --noEmit -p backend-libreria && npm run check -w frontend-libreria",
+    "build": "npm run build --workspaces",
+    "start": "npm start -w backend-libreria"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}
